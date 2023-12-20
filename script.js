@@ -159,8 +159,7 @@ function endGame() {
    Swal.fire({
       icon: "error",
       title: "Game Over",
-      text: `The word is : ${randomValueValue} `,
-      html: `<div>The number of your mistakes is : ${wrongAttempts}</div>`,
+      html:`The word is : ${randomValueValue} ` +  `<div>The number of your mistakes is : ${wrongAttempts}</div>`,
       footer: `Your level is : ${level}`
       // footer: '<a href=${}>Why do I have this issue?</a>'
    }).then((result) => {
