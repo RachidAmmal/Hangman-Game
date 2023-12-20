@@ -18,11 +18,11 @@ lettersArray.forEach((letter) => {
 
 //Object Of Words + Categories
 const words = {
-   programming: ["php", "javascript", "go", "scala", "fortran", "r", "mysql", "python", "C", "HTML"],
-   movies: ["Prestige", "Inception", "Parasite", "Interstellar", "Whiplash", "Memento", "Coco", "Up"],
-   people: ["Daniel Abu Zakariya", "Albert Einstein", "Hitchcock", "Alexander", "Cleopatra", "Mahatma Ghandi", "Isaac Newton"],
-   countries: ["Algeria", "Morocco", "Syria", "Palestine", "Yemen", "Egypt", "Bahrain", "Qatar", "Tunis"],
-   animals: ["Bear", "Cat", "Lion", "Fish", "Crocodile", "Cow", "Camel", "Giraffe", "Tiger"],
+   programming: ["php", "javascript", "go", "scala", "fortran", "r", "mysql", "python", "C", "HTML", "Java", "MATLAB", "Css"],
+   movies: ["Prestige", "Inception", "Parasite", "Interstellar", "Whiplash", "Memento", "Coco", "Up", "The Godfather", "Fight Club", "The Dark Knight"],
+   people: ["Albert Einstein", "Hitchcock", "Alexander", "Cleopatra", "Mahatma Ghandi", "Isaac Newton", "Benjamin Franklin", "Ludwig van Beethoven"],
+   countries: ["Algeria", "Morocco", "Syria", "Palestine", "Yemen", "Egypt", "Bahrain", "Qatar", "Tunisia", "Iraq", "Lebanon", "Oman", "Sudan"],
+   animals: ["Bear", "Cat", "Lion", "Fish", "Crocodile", "Cow", "Camel", "Giraffe", "Tiger", "Zebra", "Snake", "Monkey", "Mouse", "Goat", "Duck"],
 }
 
 //Get Random Property
@@ -47,7 +47,6 @@ let lettersGuessContainer = document.querySelector('.letters-guess')
 //Convert Chosen Word To Array
 let lettersAndSpace = Array.from(randomValueValue)
 
-
 //Create Spans Depend On Word
 lettersAndSpace.forEach((letter) => {
    //Create Empty Span
@@ -68,10 +67,24 @@ let guessSpans = document.querySelectorAll(".letters-guess span");
 //Set Wrong Attempts
 let wrongAttempts = 0
 
+let level;
+if (wrongAttempts <= 4) {
+   level = 'Good'
+} else if (wrongAttempts > 4 && wrongAttempts <= 8) {
+   level = 'Medium'
+} else if (wrongAttempts > 8 && wrongAttempts <= 10) {
+   level = 'Low'
+}
+
 //Select The Draw Element
 let theDraw = document.querySelector(".hangman-draw")
 
 let arr = []
+
+//New Game
+document.querySelector('.btn').addEventListener('click', () => {
+   window.location.reload();
+})
 //Handel Clicking On Letters
 document.addEventListener("click", (e) => {
    //Set The Chose status
@@ -80,6 +93,7 @@ document.addEventListener("click", (e) => {
    //Select Guess Spans
    if (e.target.className === 'letter-box') {
       e.target.classList.add("clicked")
+
       //Get Clicked Letter
       let theClickedLetter = e.target.innerHTML.toLowerCase()
 
@@ -92,16 +106,20 @@ document.addEventListener("click", (e) => {
             arr.push(theClickedLetter)
             // If The TheChosenWord Length = The Array Of TheClickedLetter
             if (arr.length === theChosenWord.length) {
+
                Swal.fire({
-                  position: "center",
                   icon: "success",
-                  title: "Good Job ",
-                  showConfirmButton: false,
-                  timer: 1500
-               });
-               setTimeout(() => {
-                  window.location.reload();
-               }, 2500)
+                  title: "Good Job",
+                  text: `The number of your mistakes is : ${wrongAttempts} \n `,
+                  footer: `Your level is : ${level}`
+                  // footer: '<a href=${}>Why do I have this issue?</a>'
+               }).then((result) => {
+                  if (result.isConfirmed) {
+                     setTimeout(() => {
+                        window.location.reload();
+                     }, 500)
+                  }
+               })
             }
             //Set Status To Correct 
             theStatus = true;
@@ -112,8 +130,8 @@ document.addEventListener("click", (e) => {
                }
             })
          }
-
       })
+
       //Outside Loop
       //If letter Is wrong
       if (theStatus !== true) {
@@ -126,6 +144,7 @@ document.addEventListener("click", (e) => {
          //Play Fail Sound
          document.getElementById("fail").play()
          if (wrongAttempts === 11) {
+            level = 'Low'
             endGame()
             lettersContainer.classList.add("finished")
          }
@@ -139,11 +158,13 @@ document.addEventListener("click", (e) => {
 function endGame() {
    Swal.fire({
       icon: "error",
-      title: "Oops...",
-      text: `The word is : ${randomValueValue}`,
+      title: "Game Over",
+      text: `The word is : ${randomValueValue} `,
+      html: `<div>The number of your mistakes is : ${wrongAttempts}</div>`,
+      footer: `Your level is : ${level}`
       // footer: '<a href=${}>Why do I have this issue?</a>'
    }).then((result) => {
-      if(result.isConfirmed){
+      if (result.isConfirmed) {
          setTimeout(() => {
             window.location.reload();
          }, 500)
