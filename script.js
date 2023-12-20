@@ -71,6 +71,7 @@ let wrongAttempts = 0
 //Select The Draw Element
 let theDraw = document.querySelector(".hangman-draw")
 
+let arr = []
 //Handel Clicking On Letters
 document.addEventListener("click", (e) => {
    //Set The Chose status
@@ -88,9 +89,22 @@ document.addEventListener("click", (e) => {
       theChosenWord.forEach((wordLetter, wordIndex) => {
          //If the Clicked Letter Equal One Of The Chosen Word Letter
          if (theClickedLetter == wordLetter) {
+            arr.push(theClickedLetter)
+            // If The TheChosenWord Length = The Array Of TheClickedLetter
+            if (arr.length === theChosenWord.length) {
+               Swal.fire({
+                  position: "center",
+                  icon: "success",
+                  title: "Good Job ",
+                  showConfirmButton: false,
+                  timer: 1500
+               });
+               setTimeout(() => {
+                  window.location.reload();
+               }, 2500)
+            }
             //Set Status To Correct 
             theStatus = true;
-            
             //Loop On All Guess Spans
             guessSpans.forEach((spanEl, spanInd) => {
                if (wordIndex === spanInd) {
@@ -119,18 +133,20 @@ document.addEventListener("click", (e) => {
          //Play Succes Sound
          document.getElementById("success").play()
       }
-
    }
-   
 })
-
-//End Game Function
 
 function endGame() {
    Swal.fire({
       icon: "error",
       title: "Oops...",
       text: `The word is : ${randomValueValue}`,
-      // footer: '<a href="#">Why do I have this issue?</a>'
-   });
+      // footer: '<a href=${}>Why do I have this issue?</a>'
+   }).then((result) => {
+      if(result.isConfirmed){
+         setTimeout(() => {
+            window.location.reload();
+         }, 500)
+      }
+   })
 }
