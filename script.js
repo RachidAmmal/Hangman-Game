@@ -23,7 +23,7 @@ const words = {
    people: ["Albert Einstein", "Hitchcock", "Alexander", "Cleopatra", "Mahatma Ghandi", "Isaac Newton", "Benjamin Franklin", "Ludwig van Beethoven"],
    countries: ["Algeria", "Morocco", "Syria", "Palestine", "Yemen", "Egypt", "Bahrain", "Qatar", "Tunisia", "Iraq", "Lebanon", "Oman", "Sudan"],
    animals: ["Bear", "Cat", "Lion", "Fish", "Crocodile", "Cow", "Camel", "Giraffe", "Tiger", "Zebra", "Snake", "Monkey", "Mouse", "Goat", "Duck"],
-   sport: ["Football ", "Basketball", "Cricket", "Hockey", "Tennis", "Volleyball", "Boxing", "Cycling", "Baseball", "Handball"]
+   sport: ["Football", "Basketball", "Cricket", "Hockey", "Tennis", "Volleyball", "Boxing", "Cycling", "Baseball", "Handball"]
 }
 
 //Get Random Property
@@ -68,15 +68,6 @@ let guessSpans = document.querySelectorAll(".letters-guess span");
 //Set Wrong Attempts
 let wrongAttempts = 0
 
-let level;
-if (wrongAttempts <= 4) {
-   level = 'Good'
-} else if (wrongAttempts > 4 && wrongAttempts <= 8) {
-   level = 'Medium'
-} else if (wrongAttempts > 8 && wrongAttempts <= 10) {
-   level = 'Low'
-}
-
 //Select The Draw Element
 let theDraw = document.querySelector(".hangman-draw")
 
@@ -108,18 +99,22 @@ document.addEventListener("click", (e) => {
             // If The TheChosenWord Length = The Array Of TheClickedLetter
             if (arr.length === theChosenWord.length) {
                let level2;
+               let color;
                if (wrongAttempts <= 4) {
                   level2 = 'Good'
+                  color = 'green'
                } else if (wrongAttempts > 4 && wrongAttempts <= 8) {
                   level2 = 'Medium'
+                  color = 'orange'
                } else if (wrongAttempts > 8 && wrongAttempts <= 10) {
                   level2 = 'Low'
+                  color = 'orangered'
                }
                Swal.fire({
                   icon: "success",
                   title: "Good Job",
-                  text: `The number of your mistakes is : ${wrongAttempts} \n `,
-                  footer: `Your level is : ${level2}`
+                  html: `The number of your mistakes is : <span style= "font-weight: 600; color: ${color}">${wrongAttempts}</span> `,
+                  footer: `Your level is : <span style= "font-weight: 600; color: ${color}">${level2} </span>`
                   // footer: '<a href=${}>Why do I have this issue?</a>'
                }).then((result) => {
                   if (result.isConfirmed) {
@@ -167,8 +162,8 @@ function endGame() {
    Swal.fire({
       icon: "error",
       title: "Game Over",
-      html: `The word is : ${randomValueValue} ` + `<div style= "padding-top: 15px;">The number of your mistakes is : ${wrongAttempts}</div>`,
-      footer: `Your level is : ${level}`
+      html: `The word is : <span style="font-weight: 600; color: red">${randomValueValue} </span>` + `<div style= "padding-top: 15px;">The number of your mistakes is : <span style="font-weight: 600; color: red">${wrongAttempts}</span> </div>`,
+      footer: `Your level is : <span style="font-weight: 700; color: red">Bad</span>`
       // footer: '<a href=${}>Why do I have this issue?</a>'
    }).then((result) => {
       if (result.isConfirmed) {
