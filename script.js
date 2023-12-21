@@ -23,6 +23,7 @@ const words = {
    people: ["Albert Einstein", "Hitchcock", "Alexander", "Cleopatra", "Mahatma Ghandi", "Isaac Newton", "Benjamin Franklin", "Ludwig van Beethoven"],
    countries: ["Algeria", "Morocco", "Syria", "Palestine", "Yemen", "Egypt", "Bahrain", "Qatar", "Tunisia", "Iraq", "Lebanon", "Oman", "Sudan"],
    animals: ["Bear", "Cat", "Lion", "Fish", "Crocodile", "Cow", "Camel", "Giraffe", "Tiger", "Zebra", "Snake", "Monkey", "Mouse", "Goat", "Duck"],
+   sport: ["Football ", "Basketball", "Cricket", "Hockey", "Tennis", "Volleyball", "Boxing", "Cycling", "Baseball", "Handball"]
 }
 
 //Get Random Property
@@ -106,12 +107,19 @@ document.addEventListener("click", (e) => {
             arr.push(theClickedLetter)
             // If The TheChosenWord Length = The Array Of TheClickedLetter
             if (arr.length === theChosenWord.length) {
-
+               let level2;
+               if (wrongAttempts <= 4) {
+                  level2 = 'Good'
+               } else if (wrongAttempts > 4 && wrongAttempts <= 8) {
+                  level2 = 'Medium'
+               } else if (wrongAttempts > 8 && wrongAttempts <= 10) {
+                  level2 = 'Low'
+               }
                Swal.fire({
                   icon: "success",
                   title: "Good Job",
                   text: `The number of your mistakes is : ${wrongAttempts} \n `,
-                  footer: `Your level is : ${level}`
+                  footer: `Your level is : ${level2}`
                   // footer: '<a href=${}>Why do I have this issue?</a>'
                }).then((result) => {
                   if (result.isConfirmed) {
@@ -159,7 +167,7 @@ function endGame() {
    Swal.fire({
       icon: "error",
       title: "Game Over",
-      html:`The word is : ${randomValueValue} ` +  `<div>The number of your mistakes is : ${wrongAttempts}</div>`,
+      html: `The word is : ${randomValueValue} ` + `<div style= "padding-top: 15px;">The number of your mistakes is : ${wrongAttempts}</div>`,
       footer: `Your level is : ${level}`
       // footer: '<a href=${}>Why do I have this issue?</a>'
    }).then((result) => {

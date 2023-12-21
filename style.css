@@ -244,6 +244,11 @@ hr{
    text-transform: uppercase;
    cursor: pointer;
    margin-bottom: 10px;
+   transition: .2s;
+   -webkit-transition: .2s;
+   -moz-transition: .2s;
+   -ms-transition: .2s;
+   -o-transition: .2s;
 }
 .letters .letter-box.clicked{
    background-color: #222;
