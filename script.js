@@ -1,8 +1,3 @@
-// New Game
-document.querySelector('.btn').addEventListener('click', () => {
-   window.location.reload();
-})
-
 // Letters
 const letters = "abcdefghijklmnopqrstuvwxyz"
 
@@ -65,6 +60,11 @@ lettersAndSpace.forEach((letter) => {
    }
    //Append Spans To The Letters Guess Container
    lettersGuessContainer.appendChild(emptySpan)
+})
+
+//New Game
+document.querySelector('.btn').addEventListener('click', () => {
+   window.location.reload();
 })
 
 //Select Guess Spans
