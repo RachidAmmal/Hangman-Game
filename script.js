@@ -1,3 +1,8 @@
+// New Game
+document.querySelector('.btn').addEventListener('click', () => {
+   window.location.reload();
+})
+
 // Letters
 const letters = "abcdefghijklmnopqrstuvwxyz"
 
@@ -73,10 +78,6 @@ let theDraw = document.querySelector(".hangman-draw")
 
 let arr = []
 
-//New Game
-document.querySelector('.btn').addEventListener('click', () => {
-   window.location.reload();
-})
 //Handel Clicking On Letters
 document.addEventListener("click", (e) => {
    //Set The Chose status
@@ -91,6 +92,8 @@ document.addEventListener("click", (e) => {
 
       //The Chosen Word
       let theChosenWord = Array.from(randomValueValue.toLowerCase())
+      let level2;
+      let color;
 
       theChosenWord.forEach((wordLetter, wordIndex) => {
          //If the Clicked Letter Equal One Of The Chosen Word Letter
@@ -98,8 +101,6 @@ document.addEventListener("click", (e) => {
             arr.push(theClickedLetter)
             // If The TheChosenWord Length = The Array Of TheClickedLetter
             if (arr.length === theChosenWord.length) {
-               let level2;
-               let color;
                if (wrongAttempts <= 4) {
                   level2 = 'Good'
                   color = 'green'
@@ -114,7 +115,7 @@ document.addEventListener("click", (e) => {
                   icon: "success",
                   title: "Good Job",
                   html: `The number of your mistakes is : <span style= "font-weight: 600; color: ${color}">${wrongAttempts}</span> `,
-                  footer: `Your level is : <span style= "font-weight: 600; color: ${color}">${level2} </span>`
+                  footer: `Your level is : <span style= "font-weight: 600; color: ${color}">${level2}</span>`
                   // footer: '<a href=${}>Why do I have this issue?</a>'
                }).then((result) => {
                   if (result.isConfirmed) {
