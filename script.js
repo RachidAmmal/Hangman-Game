@@ -98,6 +98,14 @@ document.addEventListener("click", (e) => {
       theChosenWord.forEach((wordLetter, wordIndex) => {
          //If the Clicked Letter Equal One Of The Chosen Word Letter
          if (theClickedLetter == wordLetter) {
+            //Set Status To Correct 
+            theStatus = true;
+            //Loop On All Guess Spans
+            guessSpans.forEach((spanEl, spanInd) => {
+               if (wordIndex === spanInd) {
+                  spanEl.innerHTML = theClickedLetter
+               }
+            })
             arr.push(theClickedLetter)
             // If The TheChosenWord Length = The Array Of TheClickedLetter
             if (arr.length === theChosenWord.length) {
@@ -125,14 +133,6 @@ document.addEventListener("click", (e) => {
                   }
                })
             }
-            //Set Status To Correct 
-            theStatus = true;
-            //Loop On All Guess Spans
-            guessSpans.forEach((spanEl, spanInd) => {
-               if (wordIndex === spanInd) {
-                  spanEl.innerHTML = theClickedLetter
-               }
-            })
          }
       })
 

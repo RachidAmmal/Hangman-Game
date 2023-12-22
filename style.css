@@ -232,6 +232,7 @@ hr{
    pointer-events: none;
 }
 .letters .letter-box{
+   border-radius: 10px;
    font-weight: bold;
    font-size: 24px;
    width: 55px;
@@ -249,6 +250,10 @@ hr{
    -moz-transition: .2s;
    -ms-transition: .2s;
    -o-transition: .2s;
+   -webkit-border-radius: 10px;
+   -moz-border-radius: 10px;
+   -ms-border-radius: 10px;
+   -o-border-radius: 10px;
 }
 .letters .letter-box.clicked{
    background-color: #222;
