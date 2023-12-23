@@ -148,7 +148,6 @@ document.addEventListener("click", (e) => {
          //Play Fail Sound
          document.getElementById("fail").play()
          if (wrongAttempts === 11) {
-            level = 'Low'
             endGame()
             lettersContainer.classList.add("finished")
          }
